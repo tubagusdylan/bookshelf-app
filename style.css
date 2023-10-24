@@ -141,6 +141,7 @@ header {
   border: none;
   border-radius: 5px;
   margin-top: 10px;
+  margin-right: 5px;
   cursor: pointer;
 }
 
