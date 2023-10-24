@@ -7,6 +7,50 @@
     <title>Bookshelf App</title>
   </head>
   <body>
+    <header class="container">
+      <nav class="nav-bar">
+        <h1>Perpustakaan Online</h1>
+      </nav>
+    </header>
+
+    <section class="container search-section">
+      <div class="section2-card">
+        <h2>Cari judul buku</h2>
+        <form id="form-cari-buku">
+          <input type="text" class="find-input" placeholder="Bumi" />
+          <button class="find-button">Cari</button>
+        </form>
+      </div>
+    </section>
+
+    <section class="main-section container">
+      <div class="section-card">
+        <h2>Masukkan buku baru</h2>
+        <form id="form-input-buku">
+          <label for="title-input">Judul</label>
+          <input type="text" id="title-input" class="input-add-buku" />
+
+          <label for="author-input">Penulis</label>
+          <input type="text" id="author-input" class="input-add-buku" />
+
+          <label for="year-input">Tahun</label>
+          <input type="text" id="year-input" class="input-add-buku" />
+
+          <label for="book-completed">Selesai dibaca</label>
+          <input type="checkbox" id="book-completed" />
+
+          <button class="button-add-buku">Tambah buku ke rak</button>
+        </form>
+      </div>
+      <div class="section-card">
+        <h2>Belum Selesai dibaca</h2>
+        <div class="book-container"></div>
+      </div>
+      <div class="section-card">
+        <h2>Selesai dibaca</h2>
+        <div class="book-container"></div>
+      </div>
+    </section>
     <script src="app.js"></script>
   </body>
 </html>

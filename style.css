@@ -1,0 +1,172 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@200;400;500;600;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+}
+
+.container {
+  padding: 25px 6rem;
+}
+
+header {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgb(187, 4, 147);
+}
+
+.nav-bar {
+  color: white;
+}
+
+.search-section {
+  width: 100%;
+  margin-top: 4rem;
+}
+
+.section2-card {
+  width: 50%;
+  padding: 5px 10px;
+  color: rgb(187, 4, 147);
+}
+
+.section2-card h2 {
+  margin-bottom: 10px;
+}
+
+.find-input {
+  width: 60%;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 16px;
+  border: 1px solid rgb(187, 4, 147);
+  margin-right: 10px;
+}
+
+.find-input:focus {
+  outline: 3px solid skyblue;
+}
+
+.find-button {
+  padding: 5px 10px;
+  font-size: 16px;
+  background-color: rgb(187, 4, 147);
+  color: white;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+
+.find-button:hover {
+  background-color: rgb(145, 5, 114);
+}
+
+.main-section {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: start;
+}
+
+.section-card {
+  width: calc(100% / 3 - 10px);
+  border: 2px solid rgb(187, 4, 147);
+  border-radius: 5px;
+  padding: 5px 10px;
+  color: rgb(187, 4, 147);
+}
+
+.section-card h2 {
+  margin-bottom: 15px;
+}
+
+.input-add-buku {
+  display: block;
+  margin: 10px 0;
+  width: 100%;
+  padding: 5px 10px;
+  border: 1px solid rgb(187, 4, 147);
+  font-size: 16px;
+  border-radius: 5px;
+}
+
+.input-add-buku:focus {
+  outline: 3px solid skyblue;
+}
+
+.button-add-buku {
+  width: 100%;
+  padding: 5px 10px;
+  font-size: 16px;
+  display: block;
+  margin: 10px 0;
+  background-color: rgb(187, 4, 147);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.button-add-buku:hover {
+  background-color: rgb(145, 5, 114);
+}
+
+.book-container {
+  width: calc(100% - 10px);
+  margin: 0 auto;
+}
+
+.book-card {
+  border: 1px solid rgb(145, 5, 114);
+  padding: 10px 15px;
+  border-radius: 5px;
+  color: black;
+  margin-bottom: 15px;
+}
+
+.book-card h3,
+.book-card h4,
+.book-card h5 {
+  margin-bottom: 5px;
+}
+
+.btn {
+  padding: 5px 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.button-completed {
+  background-color: green;
+  color: white;
+}
+
+.button-completed:hover {
+  background-color: rgb(1, 92, 1);
+}
+
+.button-edited {
+  background-color: skyblue;
+  color: white;
+}
+
+.button-edited:hover {
+  background-color: rgb(109, 164, 186);
+}
+
+.button-deleted {
+  background-color: rgb(248, 77, 105);
+  color: white;
+}
+
+.button-deleted:hover {
+  background-color: rgb(187, 4, 4);
+}
