@@ -10,6 +10,9 @@ const addBookForm = document.getElementById("form-input-buku");
 let editMenu = false;
 let currentId;
 
+const searchBookForm = document.getElementById("form-cari-buku");
+const searchTitleBook = document.getElementById("search-input");
+
 const bookStorage = "BOOK_STORAGE";
 
 window.onload = () => {
@@ -59,14 +62,28 @@ addBookForm.onsubmit = (e) => {
   clearInputValue();
 };
 
-function showBooks() {
+searchBookForm.onsubmit = (e) => {
+  e.preventDefault();
+
+  const searchText = searchTitleBook.value.toLowerCase();
+  showBooks(searchText);
+};
+
+function showBooks(searchText) {
   clearInnerHTML();
 
   books = JSON.parse(localStorage.getItem(bookStorage));
-  console.log(books);
+
+  if (!searchText) {
+    searchText = "";
+  }
+
   for (let i = 0; i < books.length; i++) {
     const book = books[i];
-    addBook(book, i);
+
+    if (book.title.toLowerCase().includes(searchText)) {
+      addBook(book, i);
+    }
   }
 }
 
