@@ -10,12 +10,31 @@ const addBookForm = document.getElementById("form-input-buku");
 
 addBookForm.onsubmit = (e) => {
   e.preventDefault();
+
+  const newBook = {
+    id: Date.now(),
+    title: title.value,
+    author: author.value,
+    year: Number(year.value),
+    isCompleted: isCompleted.checked,
+  };
+
+  books.push(newBook);
+
+  clearInnerHTML();
   showBooks();
-  console.log(books);
 };
 
 function showBooks() {
-  addBook();
+  for (let i = 0; i < books.length; i++) {
+    const book = books[i];
+    addBook(book, i);
+  }
+}
+
+function clearInnerHTML() {
+  bookContainerCompleted.innerHTML = "";
+  bookContainerUncompleted.innerHTML = "";
 }
 
 function checkStorage() {
@@ -26,15 +45,7 @@ function checkStorage() {
   return true;
 }
 
-function addBook(index) {
-  const newBook = {
-    id: Date.now(),
-    title: title.value,
-    author: author.value,
-    year: Number(year.value),
-    isCompleted: isCompleted.checked,
-  };
-
+function addBook(book, index) {
   const bookCard = document.createElement("div");
   const bookTitle = document.createElement("h3");
   const bookAuthor = document.createElement("h4");
@@ -45,9 +56,9 @@ function addBook(index) {
 
   bookCard.className = "book-card";
 
-  bookTitle.innerText = newBook.title;
-  bookAuthor.innerText = newBook.author;
-  bookYear.innerText = newBook.year;
+  bookTitle.innerText = book.title;
+  bookAuthor.innerText = book.author;
+  bookYear.innerText = book.year;
 
   buttonCompleted.innerText = "Selesai";
   buttonCompleted.classList.add("btn", "button-completed");
@@ -60,11 +71,9 @@ function addBook(index) {
 
   bookCard.append(bookTitle, bookAuthor, bookYear, buttonCompleted, buttonEdited, buttonDeleted);
 
-  if (newBook.isCompleted) {
+  if (book.isCompleted) {
     bookContainerCompleted.appendChild(bookCard);
   } else {
     bookContainerUncompleted.appendChild(bookCard);
   }
-
-  books.push(newBook);
 }
