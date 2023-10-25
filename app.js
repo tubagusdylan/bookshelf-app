@@ -7,9 +7,28 @@ const author = document.getElementById("author-input");
 const year = document.getElementById("year-input");
 const isCompleted = document.getElementById("book-completed");
 const addBookForm = document.getElementById("form-input-buku");
+let editMenu = false;
+let currentId;
 
 addBookForm.onsubmit = (e) => {
   e.preventDefault();
+
+  if (editMenu) {
+    const index = books.findIndex((book) => {
+      return book.id === currentId;
+    });
+
+    books[index].title = title.value;
+    books[index].author = author.value;
+    books[index].year = year.value;
+    books[index].isCompleted = isCompleted.checked;
+
+    showBooks();
+    clearInputValue();
+    document.getElementById("button-add").innerText = "Tambah buku ke rak";
+    editMenu = false;
+    return;
+  }
 
   const newBook = {
     id: Date.now(),
@@ -21,6 +40,7 @@ addBookForm.onsubmit = (e) => {
 
   books.push(newBook);
   showBooks();
+  clearInputValue();
 };
 
 function showBooks() {
@@ -35,6 +55,13 @@ function showBooks() {
 function clearInnerHTML() {
   bookContainerCompleted.innerHTML = "";
   bookContainerUncompleted.innerHTML = "";
+}
+
+function clearInputValue() {
+  title.value = "";
+  author.value = "";
+  year.value = "";
+  isCompleted.checked = false;
 }
 
 function checkStorage() {
@@ -62,6 +89,9 @@ function addBook(book, index) {
 
   buttonEdited.innerText = "Edit";
   buttonEdited.classList.add("btn", "button-edited");
+  buttonEdited.onclick = () => {
+    updateBook(index);
+  };
 
   buttonDeleted.innerText = "Hapus";
   buttonDeleted.classList.add("btn", "button-deleted");
@@ -78,7 +108,6 @@ function addBook(book, index) {
     };
 
     bookCard.append(bookTitle, bookAuthor, bookYear, buttonCompleted, buttonEdited, buttonDeleted);
-
     bookContainerCompleted.appendChild(bookCard);
   } else {
     buttonCompleted.innerText = "Selesai";
@@ -96,4 +125,15 @@ function addBook(book, index) {
 function deleteBook(index) {
   books.splice(index, 1);
   showBooks();
+}
+
+function updateBook(index) {
+  currentId = books[index].id;
+  title.value = books[index].title;
+  author.value = books[index].author;
+  year.value = books[index].year;
+  isCompleted.checked = books[index].isCompleted;
+  editMenu = true;
+
+  document.getElementById("button-add").innerText = "Update Buku";
 }
