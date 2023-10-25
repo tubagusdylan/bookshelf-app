@@ -10,6 +10,20 @@ const addBookForm = document.getElementById("form-input-buku");
 let editMenu = false;
 let currentId;
 
+const bookStorage = "BOOK_STORAGE";
+
+window.onload = () => {
+  if (!checkStorage()) {
+    return;
+  }
+
+  if (localStorage.getItem(bookStorage) !== null) {
+    showBooks();
+  } else {
+    localStorage.setItem(bookStorage, "");
+  }
+};
+
 addBookForm.onsubmit = (e) => {
   e.preventDefault();
 
@@ -23,6 +37,7 @@ addBookForm.onsubmit = (e) => {
     books[index].year = year.value;
     books[index].isCompleted = isCompleted.checked;
 
+    saveBooksOnStorage();
     showBooks();
     clearInputValue();
     document.getElementById("button-add").innerText = "Tambah buku ke rak";
@@ -39,6 +54,7 @@ addBookForm.onsubmit = (e) => {
   };
 
   books.push(newBook);
+  saveBooksOnStorage();
   showBooks();
   clearInputValue();
 };
@@ -46,6 +62,8 @@ addBookForm.onsubmit = (e) => {
 function showBooks() {
   clearInnerHTML();
 
+  books = JSON.parse(localStorage.getItem(bookStorage));
+  console.log(books);
   for (let i = 0; i < books.length; i++) {
     const book = books[i];
     addBook(book, i);
@@ -66,6 +84,7 @@ function clearInputValue() {
 
 function checkStorage() {
   if (typeof Storage === undefined) {
+    alert("Browser tidak mendukung storage");
     return false;
   }
 
@@ -104,6 +123,7 @@ function addBook(book, index) {
     buttonCompleted.classList.add("btn", "button-completed");
     buttonCompleted.onclick = () => {
       books[index].isCompleted = false;
+      saveBooksOnStorage();
       showBooks();
     };
 
@@ -114,6 +134,7 @@ function addBook(book, index) {
     buttonCompleted.classList.add("btn", "button-completed");
     buttonCompleted.onclick = () => {
       books[index].isCompleted = true;
+      saveBooksOnStorage();
       showBooks();
     };
 
@@ -124,6 +145,7 @@ function addBook(book, index) {
 
 function deleteBook(index) {
   books.splice(index, 1);
+  saveBooksOnStorage();
   showBooks();
 }
 
@@ -136,4 +158,8 @@ function updateBook(index) {
   editMenu = true;
 
   document.getElementById("button-add").innerText = "Update Buku";
+}
+
+function saveBooksOnStorage() {
+  localStorage.setItem(bookStorage, JSON.stringify(books));
 }
