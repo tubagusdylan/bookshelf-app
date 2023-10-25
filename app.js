@@ -139,6 +139,9 @@ function addBook(book, index) {
     buttonCompleted.innerText = "Belum selesai";
     buttonCompleted.classList.add("btn", "button-completed");
     buttonCompleted.onclick = () => {
+      if (editMenu) {
+        return;
+      }
       books[index].isCompleted = false;
       saveBooksOnStorage();
       showBooks();
@@ -150,6 +153,9 @@ function addBook(book, index) {
     buttonCompleted.innerText = "Selesai";
     buttonCompleted.classList.add("btn", "button-completed");
     buttonCompleted.onclick = () => {
+      if (editMenu) {
+        return;
+      }
       books[index].isCompleted = true;
       saveBooksOnStorage();
       showBooks();
