@@ -20,12 +20,12 @@ addBookForm.onsubmit = (e) => {
   };
 
   books.push(newBook);
-
-  clearInnerHTML();
   showBooks();
 };
 
 function showBooks() {
+  clearInnerHTML();
+
   for (let i = 0; i < books.length; i++) {
     const book = books[i];
     addBook(book, i);
@@ -60,20 +60,32 @@ function addBook(book, index) {
   bookAuthor.innerText = book.author;
   bookYear.innerText = book.year;
 
-  buttonCompleted.innerText = "Selesai";
-  buttonCompleted.classList.add("btn", "button-completed");
-
   buttonEdited.innerText = "Edit";
   buttonEdited.classList.add("btn", "button-edited");
 
   buttonDeleted.innerText = "Hapus";
   buttonDeleted.classList.add("btn", "button-deleted");
 
-  bookCard.append(bookTitle, bookAuthor, bookYear, buttonCompleted, buttonEdited, buttonDeleted);
-
   if (book.isCompleted) {
+    buttonCompleted.innerText = "Belum selesai";
+    buttonCompleted.classList.add("btn", "button-completed");
+    buttonCompleted.onclick = () => {
+      books[index].isCompleted = false;
+      showBooks();
+    };
+
+    bookCard.append(bookTitle, bookAuthor, bookYear, buttonCompleted, buttonEdited, buttonDeleted);
+
     bookContainerCompleted.appendChild(bookCard);
   } else {
+    buttonCompleted.innerText = "Selesai";
+    buttonCompleted.classList.add("btn", "button-completed");
+    buttonCompleted.onclick = () => {
+      books[index].isCompleted = true;
+      showBooks();
+    };
+
+    bookCard.append(bookTitle, bookAuthor, bookYear, buttonCompleted, buttonEdited, buttonDeleted);
     bookContainerUncompleted.appendChild(bookCard);
   }
 }
