@@ -52,7 +52,7 @@ addBookForm.onsubmit = (e) => {
     id: Date.now(),
     title: title.value,
     author: author.value,
-    year: Number(year.value),
+    year: year.value,
     isCompleted: isCompleted.checked,
   };
 
@@ -161,6 +161,9 @@ function addBook(book, index) {
 }
 
 function deleteBook(index) {
+  if (editMenu) {
+    return;
+  }
   books.splice(index, 1);
   saveBooksOnStorage();
   showBooks();
