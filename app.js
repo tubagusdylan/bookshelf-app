@@ -65,6 +65,9 @@ function addBook(book, index) {
 
   buttonDeleted.innerText = "Hapus";
   buttonDeleted.classList.add("btn", "button-deleted");
+  buttonDeleted.onclick = () => {
+    deleteBook(index);
+  };
 
   if (book.isCompleted) {
     buttonCompleted.innerText = "Belum selesai";
@@ -88,4 +91,9 @@ function addBook(book, index) {
     bookCard.append(bookTitle, bookAuthor, bookYear, buttonCompleted, buttonEdited, buttonDeleted);
     bookContainerUncompleted.appendChild(bookCard);
   }
+}
+
+function deleteBook(index) {
+  books.splice(index, 1);
+  showBooks();
 }
